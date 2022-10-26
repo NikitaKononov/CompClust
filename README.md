@@ -2,6 +2,14 @@
 Разработать решение для кластеризации названий компаний по идентичности обозначаемой компании.
 Данные:
 ![img.png](misc/img_data.png)
+
+Подготовка окружения:
+
+```
+conda create -n compclust python=3.7
+conda activate compclust
+pip3 install -r requirements.txt
+```
 ## Подход 1: классификатор SKLearn
 - Векторизация текстовых данных с помощью tf-idf<br>
 - Train test split 80 / 20

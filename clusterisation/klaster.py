@@ -1,17 +1,14 @@
 import re
+
 import pandas as pd
-from sklearn.cluster import MiniBatchKMeans
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.model_selection import GridSearchCV
-
-import nltk
-# nltk.download('popular')
-
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from pymorphy2 import MorphAnalyzer
-import numpy as np
-import matplotlib.pyplot as plt
+from sklearn.cluster import MiniBatchKMeans
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import GridSearchCV
+
+# nltk.download('popular')
 
 df_claster = pd.read_csv('../../Users/konon/Downloads/CompClust-master/CompClust-master/train.csv')
 df_train = df_claster.loc[df_claster['is_duplicate'] == 0]
@@ -22,7 +19,7 @@ morph = MorphAnalyzer()
 
 
 def token_only(text):
-    text = re.sub(bad_words,' ',text)
+    text = re.sub(bad_words, ' ', text)
     tokens = [word.lower() for sent in sent_tokenize(text) for word in word_tokenize(sent)]
     filtered_tokens = []
     for token in tokens:
@@ -48,7 +45,7 @@ parameters = {'init': ('k-means++', 'random'), 'n_clusters': [2, 3, 4], 'max_ite
 clf = GridSearchCV(mbk, parameters)
 clf.fit(tfidf_matrix_1)
 
-#предикт для обучения
+# предикт для обучения
 y_kmeansMBK = clf.predict(tfidf_matrix_1)
 num_1 = [int(pt) for pt in y_kmeansMBK]
 df_train['num_cluster_1'] = num_1
@@ -59,7 +56,7 @@ df_train['num_cluster_2'] = num_2
 
 df_train.to_csv('claster.csv', index=False)
 
-#предикт для теста
+# предикт для теста
 tfidf_matrix_3 = tfidf_vectorizer.transform(df_name1_test)
 tfidf_matrix_4 = tfidf_vectorizer.transform(df_name2_test)
 
