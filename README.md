@@ -1,9 +1,29 @@
 # Company Clust
 Разработать решение для кластеризации названий компаний по идентичности обозначаемой компании.
-
+Данные:
+![img.png](misc/img_data.png)
 ## Подход 1: классификатор SKLearn
+- Векторизация текстовых данных с помощью tf-idf<br>
+- Train test split 80 / 20
 
+Обучение классификатора дерево принятия решений DecisionTree<br>
+![img.png](misc/img14.png)<br>
+Обучение классификатора случайный лес RandomForest<br>
+![img.png](misc/img15.png)<br>
+Обучение классификатора логистическая регрессия LogisticRegression<br>
+![img.png](misc/img13.png)<br>
 ## Подход 2: кластеризатор SKLearn
+- Векторизация текстовых данных с помощью tf-idf<br>
+- Train test split: train - is_duplicate == 0, test - is_duplicate == 1
+- Оптимизация гиперпараметров - поиск по сетке (GridSearch)
+
+Обучение кластеризатора MiniBatchKMeans<br>
+accuracy 0.563
+
+Обучение кластеризатора MiniBatchKMeans и оптимизация гиперпараметров<br>
+accuracy 0.745<br>
+Подобранные параметры:<br>
+{'init': 'k-means++', 'max_iter': 200, 'n_clusters': 5}
 
 ## Подход 3: эмбеддинги текста
 Language-agnostic BERT Sentence Embedding (LaBSE)
@@ -13,6 +33,9 @@ Language-agnostic BERT Sentence Embedding (LaBSE)
 ![img.png](misc/img.png) <br>
 
 ## Эксперименты с косинусным расстоянием:<br>
+- Train test split 80/20<br>
+- Оптимизация гиперпараметров - Hyperopt
+
 Обучение классификатора случайный лес RandomForest<br>
 ![img_9.png](misc/img_9.png)<br>
 Обучение классификатора логистическая регрессия LogisticRegression<br>
