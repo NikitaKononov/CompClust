@@ -12,12 +12,14 @@ pd.options.mode.chained_assignment = None
 
 
 def learn(clf, filename):
-    train_data = pd.read_csv('train.csv')
+    train_data = pd.read_csv('../train.csv')
 
     x_train = train_data['name_1'].astype(str) + ' ' + train_data['name_2']
     y_train = train_data['is_duplicate']
     vectorizer = TfidfVectorizer(encoding='utf-8')
+
     x_train = vectorizer.fit_transform(x_train)
+
     x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size=0.2)
 
     clf = clf.fit(x_train, y_train)

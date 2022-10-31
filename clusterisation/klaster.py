@@ -10,7 +10,7 @@ from sklearn.model_selection import GridSearchCV
 
 # nltk.download('popular')
 
-df_claster = pd.read_csv('../../Users/konon/Downloads/CompClust-master/CompClust-master/train.csv')
+df_claster = pd.read_csv('../train.csv')
 df_train = df_claster.loc[df_claster['is_duplicate'] == 0]
 df_test = df_claster.loc[df_claster['is_duplicate'] > 0]
 
